@@ -1,0 +1,83 @@
+#!/bin/bash
+#LongQ will tell it to run on compute node
+#PBS -q longq
+#PBS -N eggplant
+###PBS -e /cm/shared/apps/u24_software/pipeline/logs/pbs/
+###PBS -o /cm/shared/apps/u24_software/pipeline/logs/pbs/
+###PBS -l nodes=1:ppn=40
+#PBS -l nodes=1:ppn=1
+
+echo "-----------------------------------------------------"
+echo "Date: $(date)                     Host:$(hostname)"
+echo "-----------------------------------------------------"
+
+PROGNAME=$(basename "$0")
+
+error_exit() {
+
+   # Display error message and exit
+   echo "${PROGNAME}: ${1:-"Error"}" 1>&2
+   exit 1
+}
+
+#export OMP_NUM_THREADS=40
+export OMP_NUM_THREADS=1
+
+PIPE_DIR="/cm/shared/apps/u24_software/pipeline"
+SEGDIR="$PIPE_DIR/analysis-package/pathomics_analysis/nucleusSegmentation/build/app"
+JAVADIR="$PIPE_DIR/kumquat"
+
+cd $JAVADIR
+
+CP=".:$JAVADIR/bioformats_package.jar:$JAVADIR/loci_tools.jar:"
+
+UUID=$(uuidgen)
+TMP_DIR=/data2/tcga_analysis/tmp/$UUID
+mkdir -p $TMP_DIR
+
+# Chunk off a piece of tile
+java -classpath $CP Dragonfruit $svsLocation $UUID $xpos $ypos $tileSize $tileName || error_exit "Line $LINENO"
+
+echo "RUN ALGORITHM"
+YI="$SEGDIR/mainSegmentFeatures -t img -i $TMP_DIR/$tileName -o $TMP_DIR -s $xpos,$ypos -b $tileSize,$tileSize -d $tileSize,$tileSize -a $execId -c $caseId -p $subjectId"
+
+CMD=""
+if [ "$otsu" ];then
+   CMD+=" -r $otsu"
+fi
+
+if [ "$curvWeight" ];then
+   CMD+=" -w $curvWeight"
+fi
+
+if [ "$lowThld" ];then
+   CMD+=" -l $lowThld"
+fi
+
+if [ "$upThld" ];then
+   CMD+=" -u $upThld"
+fi
+
+if [ "$kernel" ];then
+   CMD+=" -k $kernel"
+fi
+
+if [ "$mpp" ];then
+   CMD+=" -m $mpp"
+fi
+
+YI+=$CMD
+echo $YI
+$YI || error_exit "Line $LINENO"
+
+echo "LOAD DATA"
+LOAD="$JAVADIR/run_load_wsi.py -t img -i $TMP_DIR/$tileName -p $TMP_DIR -d $tileSize -c $caseId -j $subjectId -o $dbName -a $execId "
+LOAD+=$CMD
+echo $LOAD
+python $LOAD || error_exit "Line $LINENO"
+
+rm -rf $TMP_DIR
+
+echo "-----------------------------------------------------"
+echo "Date: $(date)"
+echo "-----------------------------------------------------"
