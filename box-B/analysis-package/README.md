@@ -5,18 +5,9 @@
 1. **pathomics_analysis** = segmentation code
 	* segmentation program = `mainSegmentFeatures.cxx`
 	
-	* For the "update" to this project, you would probably **build** a Docker container, and **run** the program via a `docker exec` in `eggplant.pbs` instead of calling `mainSegmentFeatures` directly.
-	
-		* ### Building & Starting The Image
-		
-		* Clone the **repo**: `git clone -b develop https://github.com/SBU-BMI/pathomics_analysis.git`
-		
-		* Navigate to the **test_segmentation** directory: `cd pathomics_analysis/nucleusSegmentation/test_segmentation/`
-		
-		* Run the `init.sh` script, and it will build the image and start the container for you.
+	* For the "update" to this project, you would probably pull the Docker container, and run the segmentation helper-script in `eggplant.pbs` instead of calling `mainSegmentFeatures` directly.
+	* **Docker container:** [https://hub.docker.com/r/sbubmi/pathomics_analysis/](https://hub.docker.com/r/sbubmi/pathomics_analysis/) -- Description contains instructions.
 
-		* `run_docker_segment.py` is a Python script that interfaces with `mainSegmentFeatures`, and it runs the `docker exec` and downloads the resulting zip file for you.
-		* For example of how to run it, see "Appendix A" in this document.
 
 3. **pathomics_featuredb** = data loader (loads data to mongodb)
 	* For the "update" to this project, you would probably pull the Docker image, and run the program via a `docker exec` in `eggplant.pbs` instead of running `featuredb-loader` via `run_load_wsi.py`.
