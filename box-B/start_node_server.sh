@@ -1,4 +1,6 @@
 #!/bin/bash
+# Requires: forever
+# Install forever locally via npm, and put in your PATH.
 
 DIR=/cm/shared/apps/u24_software/pipeline
 pgm="server.js"
