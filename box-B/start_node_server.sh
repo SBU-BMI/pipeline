@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=/cm/shared/apps/u24_software/pipeline
+DIR=/cm/shared/apps/u24_software/pipeline_bwang
 pgm="server.js"
 
 rm $DIR/logs/njs/*.log
