@@ -45,7 +45,7 @@ while getopts ":c:a:o:r:w:l:u:k:m:e:" myopts; do
 done
 shift $((OPTIND-1))
 
-JAVADIR="/cm/shared/apps/u24_software/pipeline/kumquat"
+JAVADIR="/cm/shared/apps/u24_software/pipeline_bwang/kumquat"
 
 cd ${JAVADIR}
 
