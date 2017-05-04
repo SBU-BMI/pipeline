@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JAVADIR="/cm/shared/apps/u24_software/pipeline/kumquat"
+JAVADIR="/cm/shared/apps/u24_software/pipeline_bwang/kumquat"
 
 pkg_loc=".:$JAVADIR/bioformats_package.jar:$JAVADIR/loci_tools.jar:$JAVADIR/commons-cli-1.2.jar:"
 
