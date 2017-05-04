@@ -8,6 +8,13 @@ Execute `start_node_server.sh` to start the node.js server on box-B.  (Requires 
 
 You will also need a subfolder (under pipeline) `analysis-package` containing [pathomics_analysis](https://github.com/SBU-BMI/pathomics_analysis) and [pathomics_featuredb](https://github.com/SBU-BMI/pathomics_featuredb).  Need to compile "analysis" as C++ and "featuredb" with Gradle.
 
+### Dependencies: modules
+
+* torque
+* openmpi/gcc
+* gcc
+
+
 ### Build pathomics_analysis
 
 ```
