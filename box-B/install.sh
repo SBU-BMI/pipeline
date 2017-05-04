@@ -19,6 +19,7 @@ if [ ! -d "$DIRECTORY" ]; then
   mkdir -p $DIRECTORY/pbs
 fi
 
+DIRECTORY=/cm/shared/apps/u24_software/pipeline
 cd $DIRECTORY/kumquat
 ./compile.sh
 
