@@ -97,7 +97,7 @@ read msKernel
 echo -n "Enter microns per pixel > "
 read mpp
 
-CMD="curl http://eagle.bmi.stonybrook.edu:5000?"
+CMD="curl http://eagle.bmi.stonybrook.edu:5001?"
 
 if [ "$caseid" ];then
    CMD+="c=$caseid"
