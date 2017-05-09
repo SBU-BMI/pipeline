@@ -10,7 +10,9 @@ echo ""
 
 CORRECT=false     # The correct flag
 
-host=localhost
+#host=localhost
+# quip-data container ip
+host=172.18.0.2
 port=27017
 dbname=""
 caseid=""
