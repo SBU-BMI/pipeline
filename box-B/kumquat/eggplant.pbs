@@ -23,7 +23,7 @@ error_exit() {
 #export OMP_NUM_THREADS=40
 export OMP_NUM_THREADS=1
 
-PIPE_DIR="/cm/shared/apps/u24_software/pipeline"
+PIPE_DIR="/cm/shared/apps/u24_software/pipeline_bwang"
 SEGDIR="$PIPE_DIR/analysis-package/pathomics_analysis/nucleusSegmentation/build/app"
 JAVADIR="$PIPE_DIR/kumquat"
 
