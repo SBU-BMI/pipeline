@@ -13,7 +13,7 @@ public class Apples {
     private static final int tileSize = 2048;
     private Fig fig = new Fig();
 
-    private String fileLocationList = "/cm/shared/apps/u24_software/pipeline/analysis-package/all_images.list";
+    private String fileLocationList = "/cm/shared/apps/u24_software/pipeline_bwang/analysis-package/all_images.list";
 
 
     public Apples() {
