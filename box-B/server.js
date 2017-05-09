@@ -1,7 +1,7 @@
 const http = require('http');
 const url = require('url');
 const exec = require('child_process').exec;
-const PORT = 5001;
+const PORT = 5000;
 
 function handleRequest(request, response) {
 
@@ -23,6 +23,10 @@ function handleRequest(request, response) {
 
         })
     }
+    
+    var remotehost = request.getRemoteHost();
+    
+    console.log("remotehost:", remotehost);
 
     cmd = (__dirname + "/kumquat/run_chunk_wsi.sh " + str);
 
