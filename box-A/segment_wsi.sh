@@ -29,7 +29,7 @@ do
         read dbname
 
         # Validate the input...
-        return_str=$(mongo --eval "connect('$host:$port/$dbname').images.findOne({})" | grep "_id" | xargs)
+        return_str=$(mongo --nodb --eval "connect('$host:$port/$dbname').images.findOne({})" | grep "_id" | xargs)
         #echo "connect('$host:$port/$dbname').images.findOne({})"
         #echo $return_str
         if [ "$return_str" = "" ]; then
@@ -49,7 +49,7 @@ do
         read caseid
 
         # Validate the input...
-        return_str=$(mongo --eval "connect('$host:$port/$dbname').images.find({"case_id" : '$caseid'}).limit(1).pretty()" | grep case_id | xargs)
+        return_str=$(mongo --nodb --eval "connect('$host:$port/$dbname').images.find({"case_id" : '$caseid'}).limit(1).pretty()" | grep case_id | xargs)
         if [ "$return_str" = "" ]; then
             echo "Case ID incorrect: $caseid"
             echo "Hint!  Did you enter the correct database for this Case ID?"
@@ -66,7 +66,7 @@ do
         echo -n "Enter execution id > "
         read execid
 
-        return_str=$(mongo --eval "connect('$host:$port/$dbname').metadata.find({'provenance.analysis_execution_id':'$execid','image.case_id':'$caseid'}).pretty()" | grep analysis_execution_id | xargs)
+        return_str=$(mongo --nodb --eval "connect('$host:$port/$dbname').metadata.find({'provenance.analysis_execution_id':'$execid','image.case_id':'$caseid'}).pretty()" | grep analysis_execution_id | xargs)
         size=${#return_str}
 
         # Validate the input...
@@ -80,6 +80,12 @@ done
 echo ""
 echo "For this next part, enter a value, or blank for default."
 echo ""
+
+echo -n "Choose segmentation type (0,1, or 2) > "
+echo -n "   0 => No Declumping,               > "
+echo -n "   1 => Mean Shift declumping        > "
+echo -n "   2 => Watershed declumpinG         > "
+read segtype
 
 echo -n "Enter otsu ratio (threshold grain) > "
 read otsuRatio
@@ -110,6 +116,10 @@ fi
 
 if [ "$dbname" ];then
    CMD+="&o=$dbname"
+fi
+
+if [ "$segtype" ];then
+   CMD+="&j=$segtype"
 fi
 
 if [ "$otsuRatio" ];then
