@@ -128,7 +128,7 @@ public class Cherries {
             sb.append(fig.getMpp());
         }
 
-        sb.append(" /cm/shared/apps/u24_software/pipeline/kumquat/eggplant.pbs");
+        sb.append(" /cm/shared/apps/u24_software/pipeline_bwang/kumquat/eggplant.pbs");
 
         return sb.toString();
     }
