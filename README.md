@@ -11,7 +11,7 @@ You will also need a subfolder (under pipeline) `analysis-package` containing [p
 ### Build pathomics_analysis
 
 ```
-git clone https://github.com/SBU-BMI/pathomics_analysis.git
+git clone -b develop https://github.com/SBU-BMI/pathomics_analysis.git
 cd pathomics_analysis/nucleusSegmentation
 mkdir build && cd build
 ccmake ../src
