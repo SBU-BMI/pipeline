@@ -130,7 +130,7 @@ if [ "$caseid" ];then
 fi
 
 if [ "$subjectid" ];then
-   CMD+="s=$subjectid"
+   CMD+="i=$subjectid"
 fi
 
 if [ "$execid" ];then
