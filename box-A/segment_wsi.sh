@@ -58,6 +58,24 @@ do
         fi
 done
 
+# Check subject id
+CORRECT=false     # Reset the flag
+while [ "$CORRECT" != "true" ]
+do
+        # Ask the user for the caseid...
+        echo -n "Enter subject id > "
+        read subjectid
+
+        # Validate the input...
+        return_str=$(mongo --nodb --eval "connect('$host:$port/$dbname').images.find({"subject_id" : '$subjectid'}).limit(1).pretty()" | grep subject_id | xargs)
+        if [ "$return_str" = "" ]; then
+            echo "Subject ID incorrect: $subjectid"
+            echo "Hint!  Did you enter the correct database for this Subject ID?"
+        else
+            CORRECT=true
+        fi
+done
+
 # Check execution id
 CORRECT=false     # Reset the flag
 while [ "$CORRECT" != "true" ]
@@ -110,6 +128,11 @@ CMD="curl http://eagle.bmi.stonybrook.edu:5001?"
 if [ "$caseid" ];then
    CMD+="c=$caseid"
 fi
+
+if [ "$subjectid" ];then
+   CMD+="s=$subjectid"
+fi
+
 if [ "$execid" ];then
    CMD+="&a=$execid"
 fi
