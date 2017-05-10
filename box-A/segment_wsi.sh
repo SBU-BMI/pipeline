@@ -99,9 +99,9 @@ echo ""
 echo "For this next part, enter a value, or blank for default."
 echo ""
 
-echo -n "Choose segmentation type (0,1, or 2) > "
-echo -n "   0 => No Declumping,               > "
-echo -n "   1 => Mean Shift declumping        > "
+echo "Choose segmentation type (0,1, or 2) > "
+echo "   0 => No Declumping, (default)     > "
+echo "   1 => Mean Shift declumping        > "
 echo -n "   2 => Watershed declumpinG         > "
 read segtype
 
@@ -143,6 +143,8 @@ fi
 
 if [ "$segtype" ];then
    CMD+="&j=$segtype"
+else
+   CMD+="&j=0"
 fi
 
 if [ "$otsuRatio" ];then
