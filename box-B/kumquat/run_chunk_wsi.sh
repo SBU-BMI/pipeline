@@ -9,14 +9,11 @@ error_exit() {
    exit 1
 }
 
-while getopts ":c:i:a:o:r:w:l:u:k:m:e:" myopts; do
+while getopts ":c:a:o:r:w:l:u:k:m:e:j:" myopts; do
     case "${myopts}" in
         c)
             caseId=${OPTARG}
             ;;
-        i)
-           subjectId=${OPTARG}
-            ;;    
         a)
             execId=${OPTARG}
             ;;
@@ -43,6 +40,9 @@ while getopts ":c:i:a:o:r:w:l:u:k:m:e:" myopts; do
             ;;
         e)
             e=${OPTARG}
+            ;;
+        j)
+            j=${OPTARG}
             ;;
     esac
 done
