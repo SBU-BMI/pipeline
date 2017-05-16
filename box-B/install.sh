@@ -1,25 +1,26 @@
 #!/bin/bash
 
-DIRECTORY=/cm/shared/apps/u24_software/pipeline_bwang
+software_dir=/cm/shared/apps/u24_software/pipeline_bwang
 
-if [ ! -d "$DIRECTORY" ]; then
-  echo "Making directory $DIRECTORY"
-  mkdir -p $DIRECTORY
+if [ ! -d "$software_dir" ]; then
+  echo "Making directory $software_dir"
+  mkdir -p $software_dir
 fi
 
-mv kumquat $DIRECTORY
-mv start_node_server.sh $DIRECTORY
-mv server.js $DIRECTORY
+mv kumquat $software_dir
+mv start_node_server.sh $software_dir
+mv server.js $software_dir
 
-DIRECTORY2=$DIRECTORY/logs
-if [ ! -d "$DIRECTORY2" ]; then
-  echo "Making directory $DIRECTORY2"
-  mkdir -p $DIRECTORY2
-  mkdir -p $DIRECTORY2/njs
-  mkdir -p $DIRECTORY2/pbs
+logs_dir=$software_dir/logs
+if [ ! -d "$logs_dir" ]; then
+  echo "Making directory $logs_dir"
+  mkdir -p $logs_dir
+  mkdir -p $logs_dir/njs # nodejs logs
+  mkdir -p $logs_dir/pbs # torque logs
 fi
 
-cd $DIRECTORY/kumquat
+# Compile
+cd $software_dir/kumquat
 ./compile.sh
 
 echo "Done"
