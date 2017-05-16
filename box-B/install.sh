@@ -1,26 +1,26 @@
 #!/bin/bash
 
-DIRECTORY=/cm/shared/apps/u24_software/pipeline
+software_dir=/cm/shared/apps/u24_software/pipeline
 
-if [ ! -d "$DIRECTORY" ]; then
-  echo "Making directory $DIRECTORY"
-  mkdir -p $DIRECTORY
+if [ ! -d "$software_dir" ]; then
+  echo "Making software_dir $software_dir"
+  mkdir -p $software_dir
 fi
 
-mv kumquat $DIRECTORY
-mv start_node_server.sh $DIRECTORY
-mv server.js $DIRECTORY
+mv kumquat $software_dir
+mv start_node_server.sh $software_dir
+mv server.js $software_dir
 
-DIRECTORY=/cm/shared/apps/u24_software/pipeline/logs
-if [ ! -d "$DIRECTORY" ]; then
-  echo "Making directory $DIRECTORY"
-  mkdir -p $DIRECTORY
-  mkdir -p $DIRECTORY/njs
-  mkdir -p $DIRECTORY/pbs
+software_dir=/cm/shared/apps/u24_software/pipeline/logs
+if [ ! -d "$software_dir" ]; then
+  echo "Making software_dir $software_dir"
+  mkdir -p $software_dir
+  mkdir -p $software_dir/njs
+  mkdir -p $software_dir/pbs
 fi
 
-DIRECTORY=/cm/shared/apps/u24_software/pipeline
-cd $DIRECTORY/kumquat
+software_dir=/cm/shared/apps/u24_software/pipeline
+cd $software_dir/kumquat
 ./compile.sh
 
 echo "Done"
