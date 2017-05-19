@@ -98,22 +98,15 @@ done
 CORRECT=false     # Reset the flag
 while [ "$CORRECT" != "true" ]
 do
-        echo "host: $host"
-        echo "port: $port"
-        echo "dbname: $dbname"
-        echo "case_id: $case_id"
-        echo "subject_id: $subjectid"
-        return_str=$(mongo --eval "connect('$host:$port/$dbname').images.findOne({ 'case_id':'$caseid','subject_id':'$subjectid' }, { _id: 0, filename: 1 })" | grep filename | xargs )
-	echo "mongodb result: $return_str"
+    return_str=$(mongo --eval "connect('$host:$port/$dbname').images.findOne({ 'case_id':'$caseid','subject_id':'$subjectid' }, { _id: 0, filename: 1 })" | grep filename | xargs )
 	filename=$(expr match "$return_str" '.*/\(.*svs\)')
-	echo "filename: $filename"
-        # Validate the input...
-        if [ "$filename" = "" ];then
-            echo "Filename not found"
+	# Validate the input...
+    if [ "$filename" = "" ];then
+        echo "Filename not found"
 	    exit 1
-        else
-            CORRECT=true
-        fi
+    else
+        CORRECT=true
+    fi
 done
 
 echo ""

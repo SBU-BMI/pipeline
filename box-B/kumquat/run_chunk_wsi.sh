@@ -9,13 +9,19 @@ error_exit() {
    exit 1
 }
 
-while getopts ":c:a:o:r:w:l:u:k:m:e:" myopts; do
+while getopts ":c:a:s:f:o:r:w:l:u:k:m:e:j:" myopts; do
     case "${myopts}" in
         c)
             caseId=${OPTARG}
             ;;
         a)
             execId=${OPTARG}
+            ;;
+        s)
+            subjectId=${OPTARG}
+            ;;
+        f)
+            filename=${OPTARG}
             ;;
         o)
             dbName=${OPTARG}
@@ -41,11 +47,14 @@ while getopts ":c:a:o:r:w:l:u:k:m:e:" myopts; do
         e)
             e=${OPTARG}
             ;;
+        j)
+            j=${OPTARG}
+            ;;
     esac
 done
 shift $((OPTIND-1))
 
-JAVADIR="/cm/shared/apps/u24_software/pipeline/kumquat"
+JAVADIR="/cm/shared/apps/u24_software/pipeline_bwang/kumquat"
 
 cd ${JAVADIR}
 
@@ -53,10 +62,14 @@ CP=".:$JAVADIR/bioformats_package.jar:$JAVADIR/loci_tools.jar:$JAVADIR/commons-c
 
 SIZE=2048
 
-cmdLine="java -classpath $CP Apples -c $caseId -a $execId -o $dbName"
+cmdLine="java -classpath $CP Apples -c $caseId -s $subjectId -a $execId -o $dbName -f $filename"
 
 if [ "$r" ];then
    cmdLine+=" -r $r"
+fi
+
+if [ "$j" ];then
+   cmdLine+=" -j $j"
 fi
 
 if [ "$w" ];then

@@ -18,6 +18,9 @@ public class Apples {
 
     public Apples() {
         options.addOption("c", true, "case id/image id");
+        options.addOption("s", true, "subject id");
+        options.addOption("f", true, "Filename");
+        options.addOption("j", true, "Declumping");
         options.addOption("a", true, "analysis execution id");
         options.addOption("o", true, "database name");
         options.addOption("r", true, "otsuRatio");
@@ -37,8 +40,27 @@ public class Apples {
         try {
             cmd = parser.parse(options, args);
 
+
             if (cmd.hasOption("c")) {
                 fig.setCaseId(cmd.getOptionValue("c"));
+            } else {
+                good = false;
+            }
+
+            if (cmd.hasOption("s")) {
+                fig.setSubjectId(cmd.getOptionValue("s"));
+            } else {
+                good = false;
+            }
+
+            if (cmd.hasOption("j")) {
+                fig.setDeclumping(cmd.getOptionValue("j"));
+            } else {
+                good = false;
+            }
+
+            if (cmd.hasOption("f")) {
+                fig.setFilename(cmd.getOptionValue("f"));
             } else {
                 good = false;
             }
@@ -96,7 +118,7 @@ public class Apples {
         a.parse(args);
         Fig fig = a.fig;
 
-        String fileLocation = a.getFileLocation(fig.getCaseId());
+        String fileLocation = a.getFileLocation(fig.getFilename());
 
         Bananas b = new Bananas();
         try {
@@ -134,7 +156,7 @@ public class Apples {
         System.exit(rtn);
     }
 
-    public String getFileLocation(String caseId) {
+    public String getFileLocation(String filename) {
 
         String line;
         String rtnStr = null;
@@ -146,7 +168,7 @@ public class Apples {
 
             while ((line = bufferedReader.readLine()) != null) {
 
-                if (line.contains(caseId)) {
+                if (line.contains(filename)) {
                     rtnStr = line;
                     break;
                 }
@@ -160,7 +182,7 @@ public class Apples {
         }
 
         if (rtnStr == null) {
-            System.err.println("File location not found for file: " + caseId + "\nExiting.");
+            System.err.println("File location not found for file: " + filename + "\nExiting.");
             System.exit(1);
         }
 
