@@ -2,6 +2,7 @@
 # THIS SCRIPT PROMPTS USER FOR INPUT
 # DOES ERROR CHECKING
 # AND SENDS REQUEST VIA HTTP
+# Task make CSV ready
 
 echo ""
 echo "I'm going to ask you for some information."
