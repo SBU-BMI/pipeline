@@ -128,11 +128,12 @@ def execute_loader(results_folder, db_name, subject_id, case_id, analysis_id, pa
             f.write('%s,%s,%s,0,0\n' % (subject_id, case_id, myFile))
         f.close()
 
-        loadExe = "/cm/shared/apps/u24_software/pipeline/analysis-package/pathomics_featuredb/src/build/install/featuredb-loader/bin/featuredb-loader"
+        loadExe = "/cm/shared/apps/u24_software/pipeline_bwang/analysis-package/pathomics_featuredb/src/build/install/featuredb-loader/bin/featuredb-loader"
 
-        run_cmd = loadExe + " --inptype csv --batchid q1 --fromdb --dbhost 129.49.255.19 --dbport 27017 --dest db"
+        run_cmd = loadExe + " --inptype csv --batchid q1 --fromdb --dbhost 129.49.255.12 --dbport 27017 --dest db"
         run_cmd = run_cmd + " --eid " + analysis_id
-        run_cmd = run_cmd + " --inplist " + tmp_file
+        # run_cmd = run_cmd + " --inplist " + tmp_file
+        run_cmd = run_cmd + " --quip   " + results_folder
         run_cmd = run_cmd + " --dbname " + db_name
         run_cmd = run_cmd + " --fromdb "
         run_cmd = run_cmd + " --cid " + case_id

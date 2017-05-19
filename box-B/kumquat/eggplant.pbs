@@ -2,8 +2,8 @@
 #LongQ will tell it to run on compute node
 #PBS -q longq
 #PBS -N eggplant
-###PBS -e /cm/shared/apps/u24_software/pipeline/logs/pbs/
-###PBS -o /cm/shared/apps/u24_software/pipeline/logs/pbs/
+#PBS -e /cm/shared/apps/u24_software/pipeline_bwang/logs/pbs/
+#PBS -o /cm/shared/apps/u24_software/pipeline_bwang/logs/pbs/
 ###PBS -l nodes=1:ppn=40
 #PBS -l nodes=1:ppn=1
 
@@ -23,7 +23,7 @@ error_exit() {
 #export OMP_NUM_THREADS=40
 export OMP_NUM_THREADS=1
 
-PIPE_DIR="/cm/shared/apps/u24_software/pipeline"
+PIPE_DIR="/cm/shared/apps/u24_software/pipeline_bwang"
 SEGDIR="$PIPE_DIR/analysis-package/pathomics_analysis/nucleusSegmentation/build/app"
 JAVADIR="$PIPE_DIR/kumquat"
 
@@ -39,7 +39,7 @@ mkdir -p $TMP_DIR
 java -classpath $CP Dragonfruit $svsLocation $UUID $xpos $ypos $tileSize $tileName || error_exit "Line $LINENO"
 
 echo "RUN ALGORITHM"
-YI="$SEGDIR/mainSegmentFeatures -t img -i $TMP_DIR/$tileName -o $TMP_DIR -s $xpos,$ypos -b $tileSize,$tileSize -d $tileSize,$tileSize -a $execId -c $caseId -p $subjectId"
+YI="$SEGDIR/mainSegmentFeatures -t img -i $TMP_DIR/$tileName -o $TMP_DIR -s $xpos,$ypos -b $tileSize,$tileSize -d $tileSize,$tileSize -a $execId -c $caseId -p $subjectId -j $declumping"
 
 CMD=""
 if [ "$otsu" ];then

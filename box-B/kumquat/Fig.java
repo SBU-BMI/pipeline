@@ -4,6 +4,9 @@
 public class Fig {
     private String svsLocation;
     private String caseId;
+    private String subjectId;
+    private String filename;
+    private String declumping;
     private int numChunkX;
     private int numChunkY;
     private int tileSize;
@@ -30,6 +33,30 @@ public class Fig {
 
     public void setCaseId(String caseId) {
         this.caseId = caseId;
+    }
+
+    public String getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(String SubjectId) {
+        this.subjectId = SubjectId;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String Filename) {
+        this.filename = Filename;
+    }
+
+    public String getDeclumping() {
+        return declumping;
+    }
+
+    public void setDeclumping(String Declumping) {
+        this.declumping = Declumping;
     }
 
     public int getNumChunkX() {
