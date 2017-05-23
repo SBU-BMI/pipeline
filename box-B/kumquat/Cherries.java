@@ -84,7 +84,9 @@ public class Cherries {
         sb.append(",caseId=");
         sb.append(fig.getCaseId());
         sb.append(",subjectId=");
-        sb.append(fig.getCaseId().substring(0, 12));
+        sb.append(fig.getSubjectId());
+        sb.append(",declumping=");
+        sb.append(fig.getDeclumping());
         sb.append(",xpos=");
         sb.append(xpos);
         sb.append(",ypos=");
@@ -128,7 +130,7 @@ public class Cherries {
             sb.append(fig.getMpp());
         }
 
-        sb.append(" /cm/shared/apps/u24_software/pipeline/kumquat/eggplant.pbs");
+        sb.append(" /cm/shared/apps/u24_software/pipeline_bwang/kumquat/eggplant.pbs");
 
         return sb.toString();
     }
